@@ -127,20 +127,6 @@ class Site:
                     tip = self.url
                     print(f"{url} {tip}")
                 log(f"{url} {tip}")
-        # hdtime and pttime
-        elif url == "https://hdtime.org" or url == "https://www.pttime.org":
-            attendance_url = url + "/attendance.php"
-            with session.get(attendance_url) as res:
-                r = re.compile(r"签到成功")
-                r1 = re.compile(r"请勿重复刷新")
-                if r.search(res.text):
-                    tip = "签到成功"
-                elif r1.search(res.text):
-                    tip = "重复签到"
-                else:
-                    tip = "cookie已过期"
-                    print(f"{url} {tip}")
-                log(f"{url} {tip}")
         else:
             attendance_url = url + "/attendance.php"
             with session.get(attendance_url) as res:

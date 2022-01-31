@@ -55,18 +55,16 @@ class FreeNom:
 
     def main(self) -> str:
         msg_all = ""
-        i = 0
+        i = 1
 
         for check_item in self.check_items:
-            i += 1
             username = check_item.get("username")
             password = check_item.get("password")
 
             # login
             ok = self._login(usr=username, pwd=password)
             if not ok:
-                msg_all += f"account{i} login failed\n\n"
-                continue
+                msg = f"account{i} login failed\n"
 
             # check domain status
             self._s.headers.update({"referer": "https://my.freenom.com/clientarea.php"})
@@ -74,14 +72,12 @@ class FreeNom:
 
             # login status check
             if not re.search(login_status_ptn, r.text):
-                msg_all += f"account{i} get login status failed\n\n"
-                continue
+                msg = f"account{i} get login status failed\n"
 
             # page token
             match = re.search(token_ptn, r.text)
             if not match:
-                msg_all += f"account{i} get page token failed\n\n"
-                continue
+                msg = f"account{i} get page token failed\n"
             token = match.group(1)
 
             # domains
@@ -114,6 +110,7 @@ class FreeNom:
                     )
                 result += f"{domain} 还有 {days} 天续期\n"
                 msg = f"账号{i}\n" + result
+            i += 1
             msg_all += msg + "\n"
         return msg_all
 

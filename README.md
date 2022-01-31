@@ -1,25 +1,25 @@
 <div align="center">
 <h1 align="center">定时面板上的签到盒</h1>
 
-<a href="https://github.com/Oreomeow/checkinpanel/stargazers"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Oreomeow/checkinpanel?color=yellow&logo=riseup&logoColor=yellow&style=flat-square"></a>
-<a href="https://github.com/Oreomeow/checkinpanel/network/members"><img alt="GitHub forks" src="https://img.shields.io/github/forks/Oreomeow/checkinpanel?color=orange&style=flat-square"></a>
-<a href="https://github.com/Oreomeow/checkinpanel/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/Oreomeow/checkinpanel?color=red&style=flat-square"></a>
-<a href="https://t.me/joinchat/muGNhnaZglQ0N2Q1"><img alt="Telegram" src="https://img.shields.io/badge/chat-telegram-blue.svg?logo=telegram&style=flat-square"/></a>
-<a href="https://github.com/Oreomeow/checkinpanel/search?l=python"><img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/Oreomeow/checkinpanel?color=blueviolet&logo=visual%20studio%20code&logoColor=informational&style=flat-square"></a>
-<a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg?logo=python&style=flat-square"/></a>
-<a href="https://scrutinizer-ci.com/g/Oreomeow/checkinpanel/?branch=master"><img alt="Scrutinizer code quality (GitHub/Bitbucket)" src="https://img.shields.io/scrutinizer/quality/g/Oreomeow/checkinpanel?logo=Scrutinizer&style=flat-square"></a>
-<a href="https://github.com/Oreomeow/checkinpanel/commits"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Oreomeow/checkinpanel?color=success&logo=github&style=flat-square"/></a>
+<a href="https://github.com/Oreomeow/checkinpanel/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/Oreomeow/checkinpanel?color=yellow&amp;logo=Riseup&amp;logoColor=yellow&amp;style=flat-square"/></a>
+<a href="https://github.com/Oreomeow/checkinpanel/network/members"><img alt="GitHub forks" src="https://img.shields.io/github/forks/Oreomeow/checkinpanel?color=orange&amp;style=flat-square"/></a>
+<a href="https://github.com/Oreomeow/checkinpanel/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/Oreomeow/checkinpanel?color=red&amp;style=flat-square"/></a>
+<a href="https://github.com/Oreomeow/checkinpanel/search?l=python"><img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/Oreomeow/checkinpanel?color=blueviolet&amp;logoColor=informational&amp;style=flat-square"/></a>
+<a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000?logo=Python&amp;style=flat-square"/></a>
+<a href="https://t.me/joinchat/muGNhnaZglQ0N2Q1"><img alt="Telegram" src="https://img.shields.io/badge/talk-Telegram-blue?logo=Telegram&amp;style=flat-square"/></a>
+<a href="https://github.com/Oreomeow/checkinpanel/commits"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Oreomeow/checkinpanel?color=success&amp;logo=GitHub&amp;style=flat-square"/></a>
+<a href="https://sonarcloud.io/summary/new_code?id=Oreomeow_checkinpanel"><img alt="Reliability Rating" src="https://sonarcloud.io/api/project_badges/measure?project=Oreomeow_checkinpanel&amp;metric=reliability_rating"/></a>
 </div>
 
 ## 简介
 
 > 一个主要运行在 [𝐞𝐥𝐞𝐜𝐕𝟐𝐏](https://github.com/elecV2/elecV2P.git) 或 [𝐪𝐢𝐧𝐠𝐥𝐨𝐧𝐠](https://github.com/whyour/qinglong.git) 等定时面板，同时支持系统运行环境的签到项目
 >
-> 环境：𝑷𝒚𝒕𝒉𝒐𝒏 3.8+ / 𝑵𝒐𝒅𝒆.𝒋𝒔 10+ / 𝑩𝒂𝒔𝒉 4+ / 𝑶𝒑𝒆𝒏𝑱𝑫𝑲8 / 𝑷𝒆𝒓𝒍5
+> 环境：𝑷𝒚𝒕𝒉𝒐𝒏 3.8+ / 𝑵𝒐𝒅𝒆.𝒋𝒔 / 𝑩𝒂𝒔𝒉 4+ / 𝑶𝒑𝒆𝒏𝑱𝑫𝑲8
 
 ## 注意
 
-不回答任何关于依赖安装失败的问题，包括且不限于 pip 无法找到 tomli 依赖等，请仔细阅读项目 README
+不回答任何关于依赖安装失败的问题，包括且不限于 pip 无法找到 json5 依赖等，请仔细阅读项目 README
 
 ## 特别声明
 
@@ -59,13 +59,13 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 ### 2. 抓包配置
 
-下载 [check.sample.toml](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/check.sample.toml)，根据注释说明进行抓包并配置
+下载 [check.sample.json5](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/check.sample.json5)，根据 [Sitoi](https://github.com/Sitoi/dailycheckin) 的[配置说明](https://sitoi.gitee.io/dailycheckin/settings/)进行抓包并配置
 
 ### 3. 上传配置
 
-将 `check.sample.toml` 重命名为 `check.toml` 后放入 `script/Lists` 文件夹
+将 `check.sample.json5` 重命名为 `check.json5` 后放入 `script/Lists` 文件夹
 
-* OVERVIEW -> EFSS 文件管理界面 -> 是否开启 EFSS 功能：开启 -> 目录：`./script/Lists` -> 选择文件：`check.toml` -> 开始上传
+* OVERVIEW -> EFSS 文件管理界面 -> 是否开启 EFSS 功能：开启 -> 目录：`./script/Lists` -> 选择文件：`check.json5` -> 开始上传
 
 * elecV2P 3.4.6 已支持在线编辑，右键文件即可
 
@@ -76,7 +76,7 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 | 变量 / key      | 描述                        | 支持语言 | 参考 / value                                                                                                                                                                                                                                     |
 | --------------- | --------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | HITOKOTO        | 一言                        | PY       | true 为开启，false 为关闭，默认关闭                                                                                                                                                                                                              |
-| BARK_PUSH       | bark 设备码                 | JS PY    | BARK 推送使用，填写 URL 即可，例如： `https://api.day.app/DxHcxxxxxRxxxxxxcm`                                                                                                                                                                    |
+| BARK_PUSH       | bark 设备码                 | JS PY    | BARK 推送[使用](https://github.com/Sitoi/dailycheckin/issues/29)，填写 URL 即可，例如： `https://api.day.app/DxHcxxxxxRxxxxxxcm/`                                                                                                                |
 | BARK_ARCHIVE    | * bark 存档                 | PY       | 是否存档                                                                                                                                                                                                                                         |
 | BARK_GROUP      | * bark 消息分组             | JS PY    | 消息分组                                                                                                                                                                                                                                         |
 | BARK_SOUND      | * bark 声音                 | JS PY    | 例如： `choo` ，具体值 bark-推送铃声-查看所有铃声                                                                                                                                                                                                |
@@ -108,17 +108,17 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 #### 4.2 另一种通知配置方式（当和 4.1 中值重复时，以 4.1 值为准）
 
-下载项目中的[推送配置文件](https://github.com/Oreomeow/checkinpanel/blob/master/notify.sample.toml)到**配置文件夹**，按照上述说明修改配置文件中的值并改名为 `notify.toml` ，你可以**自由地删除**该文件中某些不需要的值（注意语法）。
+下载项目中的[推送配置文件](https://github.com/Oreomeow/checkinpanel/blob/master/notify.sample.json5)到**配置文件夹**，按照上述说明修改配置文件中的值并改名为 `notify.json5` ，你可以**自由地删除**该文件中某些不需要的值（注意语法）。
 
 使用了配置文件后，你可以将配置文件放在持久化位置，不受脚本更新、重置容器的影响。
 
-如果想自定义配置文件的位置和文件名，请设置通知环境变量 `NOTIFY_CONFIG_PATH` ， 例如 `/usr/local/app/script/notify.toml` 。建议保持 `toml` 的后缀，防止编辑器的误解。
+如果想自定义配置文件的位置和文件名，请设置通知环境变量 `NOTIFY_CONFIG_PATH` ， 例如 `/usr/local/app/script/notify.json5` 。建议保持 `json5` 的后缀，防止编辑器的误解。
 
-关于 toml 的语法参考：
+关于 json5 的语法参考：
 
-* [toml-lang/toml](https://github.com/toml-lang/toml)
-* [中文知乎介绍](https://zhuanlan.zhihu.com/p/50412485)
-* [TOML 教程中文版](https://toml.io/cn/v1.0.0)
+* [官方说明](https://json5.org/)
+* [中文网友博客说明](https://zhuanlan.zhihu.com/p/108119490)
+* [json5语法验证](https://verytoolz.com/json5-validator.html)
 
 #### 4.3 通知说明
 
@@ -126,15 +126,15 @@ https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/dailycheckin.json
 
 在非容器环境中，通知环境变量使用 系统的环境变量 或者 **你通过 `NOTIFY_CONFIG_PATH` 环境变量指定的配置文件** 进行配置。
 
-特别的，如果你想要创建一个基于 python 的 elecV2P 或者 qinglong 项目，并有意愿使用 `toml` 文件，那么强烈建议你拷贝[此文件](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/notify_mtr.py)，如此可以大幅度降低用户脚本的配置难度和升级难度。
+特别的，如果你想要创建一个基于 python 的 elecV2P 或者 qinglong 项目，并有意愿使用带注释的 `json5` 文件，那么强烈建议你拷贝[此文件](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/notify_mtr.py)，如此可以大幅度降低用户脚本的配置难度和升级难度。
 
-如果只希望使用 `json` 模块和单纯获取环境变量方法，那么可以拷贝 [𝒏𝒐𝒕𝒊𝒇𝒚_𝒎𝒕𝒓_𝒆𝒏𝒗.𝒑𝒚](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/notify_mtr_env.py)。
+如果只希望使用 `json` 模块，那么可以拷贝 [𝒏𝒐𝒕𝒊𝒇𝒚_𝒎𝒕𝒓_𝒋𝒔𝒐𝒏.𝒑𝒚](https://raw.githubusercontent.com/Oreomeow/checkinpanel/master/notify_mtr_json.py)。
 
 ### 5. 检查依赖
 
 * 运行 `签到依赖` 任务后的日志
 
-    [![oSs9xK.png](https://z3.ax1x.com/2021/11/23/oSs9xK.png)](https://imgtu.com/i/oSs9xK)
+    [![5BMl7D.png](https://z3.ax1x.com/2021/10/20/5BMl7D.png)](https://imgtu.com/i/5BMl7D)
 
 * 如果任务列表安装不成功，参考 [#12](https://github.com/Oreomeow/checkinpanel/issues/12)
 
@@ -148,41 +148,57 @@ docker exec -it qinglong bash
 
 修改 `qinglong` 为你的青龙容器名称
 
-### 2. 拉取仓库
+### 2. 安装依赖
 
-**解决 Shell 脚本无法拉取问题**：将以下代码在 `config.sh` 相应位置替换
+Alpine 依赖
 
 ```sh
-## ql repo命令拉取脚本时需要拉取的文件后缀，直接写文件后缀名即可
-RepoFileExtensions="js pl py sh ts"
+apk add gcc libffi-dev musl-dev openssl-dev python3-dev
 ```
+
+Python 依赖
+
+```sh
+pip3 install bs4 cryptography~=3.2.1 json5 requests rsa
+```
+
+JavaScript 依赖
+
+```sh
+cd /ql/scripts && npm install axios crypto-js got json5 request
+```
+
+依赖持久化配置
+
+> `签到依赖` 任务保持定时运行即可
+
+### 3. 拉取仓库
 
 可添加定时任务，名称、时间自定
 
 ```sh
-ql repo https://github.com/Oreomeow/checkinpanel.git "api_|ck_|ins_" "^checkin" "^notify|^utils|cpm" "master"
+ql repo https://github.com/Oreomeow/checkinpanel.git "api_|ck_|ins_" "^checkin" "^notify|^utils" "master"
 ```
 
-### 3. 安装依赖
+**解决 Shell 脚本无法拉取问题**
 
-* **运行 `签到依赖` 任务**
+```sh
+## ql repo命令拉取脚本时需要拉取的文件后缀，直接写文件后缀名即可
+RepoFileExtensions="js py sh ts"
+```
 
-  * [截图](https://github.com/Oreomeow/checkinpanel/issues/43)
-
-* 依赖持久化配置
-
-  * `签到依赖` 任务保持定时运行即可
+将以上代码在 `config.sh` 相应位置替换
 
 ### 4. 拷贝文件
 
 ```sh
-cp /ql/repo/Oreomeow_checkinpanel_master/check.sample.toml /ql/config/check.toml
+cp /ql/repo/Oreomeow_checkinpanel_master/check.sample.json5 /ql/config/check.json5
 ```
 
 *通知配置文件（可选）*
 
 ```sh
-cp /ql/repo/Oreomeow_checkinpanel_master/notify.sample.toml /ql/config/notify.toml
+cp /ql/repo/Oreomeow_checkinpanel_master/notify.json5 /ql/config/notify.json5
 ```
 
 ### 5. 配置通知
@@ -193,14 +209,14 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.sample.toml /ql/config/notify.to
 
 * **如果你已经配置了 `config.sh`， 那么你可以不需要做任何改变。**
 * 如果使用环境变量，请在 qinglong 面板中配置。
-* 如果使用配置文件，请修改 `/ql/config/notify.toml` 文件。
+* 如果使用配置文件，请修改 `/ql/config/notify.json5` 文件。
 * 当然你也可以在 qinglong 面板中配置 `NOTIFY_CONFIG_PATH` 环境变量为配置文件指定其他位置。
 
 ### 6. 抓包配置
 
-不出意外的话可以在青龙面板的配置文件下找到 `check.toml` 文件
+不出意外的话可以在青龙面板的配置文件下找到 `check.json5` 文件
 
-根据[注释说明](https://github.com/Oreomeow/checkinpanel/blob/master/check.sample.toml)进行抓包并配置
+根据 [Sitoi](https://github.com/Sitoi/dailycheckin) 的[配置说明](https://sitoi.gitee.io/dailycheckin/settings/)进行抓包并配置
 
 ## 补充说明
 
@@ -228,7 +244,7 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.sample.toml /ql/config/notify.to
 ### 4. **添加了欢太商城的签到配置**
 
 * [欢太商城 HttpCanary 抓包教程](https://github.com/hwkxk/HeytapTask/wiki/%E6%AC%A2%E5%A4%AA%E5%95%86%E5%9F%8EHttpCanary%E6%8A%93%E5%8C%85%E6%95%99%E7%A8%8B)
-* 部分域名屏蔽境外 IP 访问，所以本项目不适于在 非中国 IP 代理网络下 / Github Actions / 境外 VPS 上运行！
+* 部分域名屏蔽境外 IP 访问，所以本项目不适于在 非中国 IP 代理网络下 / Github Actions / 境外 VPS 上运行!
 * 从未在欢太商城做过任务，请先手动进入任务中心完成一下任务再使用，否则可能无法获取到任务列表数据导致出错！@YYplus
 
 ### 5. **添加了时光相册的签到配置**
@@ -255,21 +271,19 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.sample.toml /ql/config/notify.to
 
 5. 2021 年 9 月 23 日起重新初始化项目，原本文件移到[这里](https://github.com/Oreomeow/ck_bak)，上述仓库不再进行更新，期望稳定的用户可以切换到上述仓库。
 
-6. 2021 年 11 月 17 日起由 `JSON5` 配置转为更为友好的 `TOML` 配置。
-
 ## 计划说明
 
-* [x] 𝑷𝒚𝒕𝒉𝒐𝒏 \| **api** \| LeetCode 每日一题 \| 每日一句 \| 天气预报 \| 每日新闻 \| 爱企查e卡监控 \| Hax 监控
-* [x] 𝑷𝒚𝒕𝒉𝒐𝒏 \| **多账号** \| AcFun \| 百度搜索资源平台 \| Bilibili \| 天翼云盘 \| CSDN \| 多看阅读 \| 恩山论坛 \| Fa米家 \| 网易云游戏 \| 葫芦侠 \| 爱奇艺 \| 全民K歌 \| MEIZU 社区 \| 芒果 TV \| 小米运动 \| 网易云音乐 \| 一加手机社区官方论坛 \| 哔咔漫画 \| 吾爱破解 \| 什么值得买 \| 百度贴吧 \| V2EX \| 腾讯视频 \| 微博 \| 联通沃邮箱 \| 哔咔网单 \| 王者营地 \| 有道云笔记 \| 智友邦 \| 机场签到 \| 欢太商城 \| NGA \| 掘金 \| GLaDOS \| HiFiNi \| 时光相册 \| 联通营业厅 \| 无忧行 \| FreeNom \| EUserv \| Site \| SF 轻小说 \| 在线工具 \| CCAVA \| 企鹅电竞 \| 联想乐云 \| WPS \| HOSTLOC \| Epic \| ~~Hax 续期提醒~~
-* [x] 𝑺𝒉𝒆𝒍𝒍 \| **多账号** \| SSPanel 签到 \| 国内加速
+* [x] 𝑷𝒚𝒕𝒉𝒐𝒏 \| **api** \| LeetCode 每日一题 \| 每日一句 \| 天气预报 \| 每日新闻 \| 爱企查e卡监控
+* [x] 𝑷𝒚𝒕𝒉𝒐𝒏 \| **多账号** \| AcFun \| 百度搜索资源平台 \| Bilibili \| 天翼云盘 \| CSDN \| 多看阅读 \| 恩山论坛 \| Fa米家 \| 网易云游戏 \| 葫芦侠 \| 爱奇艺 \| 全民K歌 \| MEIZU 社区 \| 芒果 TV \| 小米运动 \| 网易云音乐 \| 一加手机社区官方论坛 \| 哔咔漫画 \| 吾爱破解 \| 什么值得买 \| 百度贴吧 \| V2EX \| 腾讯视频 \| 微博 \| 联通沃邮箱 \| 哔咔网单 \| 王者营地 \| 有道云笔记 \| 智友邦
+* [x] 𝑷𝒚𝒕𝒉𝒐𝒏 \| **多账号** \| 机场签到 \| 欢太商城 \| NGA \| 掘金 \| GLaDOS \| HiFiNi \| 时光相册 \| 联通营业厅 \| 无忧行 \| FreeNom \| EUserv \| Site \| SF 轻小说 \| 在线工具 \| CCAVA \| 企鹅电竞 \| 联想乐云 \| WPS
+* [x] 𝑺𝒉𝒆𝒍𝒍 \| **多账号** \| SSPanel 签到
 * [x] 𝑱𝒂𝒗𝒂𝑺𝒄𝒓𝒊𝒑𝒕 \| **多账号** \| 什么值得买任务版 \| 爱企查 \| 网易蜗牛读书 \| 联想商城
-* [x] 𝑱𝒂𝒗𝒂 \| Bilibili 助手
-* [x] 𝑷𝒆𝒓𝒍 \| JSON5toTOML 工具
+* [x] 𝑱𝒂𝒗𝒂 \| BILIBILI-HELPER
 
 ### 项目完成情况
 
 * [x] 多账号补全
-* [x] 配置文件由严格的 `.json` 向支持注释的 `.json5` 过渡，再向更友好的 `.toml` 过渡
+* [x] 配置文件由严格的 `.json` 向支持注释的 `.json5` 过渡
 * [x] 更多环境适配
 * [x] 配置文件支持自定义路径
 * [x] 通知多线程
@@ -280,31 +294,28 @@ cp /ql/repo/Oreomeow_checkinpanel_master/notify.sample.toml /ql/config/notify.to
 * [x] 依赖安装重构
 * [ ] elecV2P cron 随机
 * [ ] 任务多合一执行
-* [ ] CK 检测判断是否跳出
 
 ### 测试情况
 
-| 状态 | 名称                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ✅    | 爱企查e卡监控 \| 国内加速 \| Hax 监控 \| LeetCode 每日一题 \| 每日一句 \| 天气预报 \| 每日新闻  \| 机场签到 \| 爱企查 \| 百度搜索资源平台 \| Bilibili \| Bilibili 助手 \| CCAVA \| 天翼云盘 \| CSDN \| 网易蜗牛读书 \| 多看阅读 \| 恩山论坛 \| EUserv \| 时光相册 \| Fa米家 \| FreeNom \| GLaDOS \| 网易云游戏 \| 欢太商城 \| HiFiNi \| HOSTLOC \| 爱奇艺 \| JSON5toTOML 工具 \| 掘金 \| 全民K歌 \| 联想乐云 \| 联想商城 \| MEIZU 社区 \| 小米运动 \| 网易云音乐 \| NGA \| 一加手机社区官方论坛 \| 吾爱破解 \| SF 轻小说 \| Site \| 什么值得买 \| 什么值得买任务版 \| SSPanel 签到 \| 百度贴吧 \| 在线工具 \| 腾讯视频 \| 微博 \| WPS \| 王者营地 \| 有道云笔记 |
-| ❔    | Epic \| 无忧行 \| 哔咔漫画 \| 联通营业厅 \| V2EX \| 联通沃邮箱 \| 哔咔网单 \| 智友邦                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ❌    | AcFun \| 企鹅电竞 \| 葫芦侠 \| 芒果 TV                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 状态 | 名称                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ✅    | 爱企查e卡监控 \| LeetCode 每日一题 \| 每日一句 \| 天气预报 \| 每日新闻 \| AcFun \| 机场签到 \| 爱企查 \| 百度搜索资源平台 \| Bilibili \| CCAVA \| 天翼云盘 \| CSDN \| 网易蜗牛读书 \| 多看阅读 \| 企鹅电竞 \| 恩山论坛 \| 时光相册 \| Fa米家 \| FreeNom \| GLaDOS \| 网易云游戏 \| 欢太商城 \| HiFiNi \| 爱奇艺 \| 掘金 \| 全民K歌 \| 联想乐云 \| 联想商城 \| MEIZU 社区 \| 小米运动 \| 网易云音乐 \| NGA \| 一加手机社区官方论坛 \| 吾爱破解 \| SF 轻小说 \| Site \| 什么值得买 \| 什么值得买任务版 \| SSPanel 签到 \| 百度贴吧 \| 在线工具 \| 腾讯视频 \| 微博 \| WPS \| 王者营地 \| 有道云笔记 |
+| ❔    | 葫芦侠 \| 无忧行 \| 哔咔漫画 \| 联通营业厅 \| V2EX \| 联通沃邮箱 \| 哔咔网单 \| 智友邦                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ❌    | EUserv \| 芒果 TV                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 ## 致谢
 
-[@𝐰𝐞𝐧𝐦𝐨𝐮𝐱](https://github.com/Wenmoux/) --------------- 𝗰𝗵𝗲𝗰𝗸𝗯𝗼𝘅
+[@𝐰𝐞𝐧𝐦𝐨𝐮𝐱](https://github.com/Wenmoux/) -------- 𝗰𝗵𝗲𝗰𝗸𝗯𝗼𝘅
 
-[@𝐒𝐢𝐭𝐨𝐢](https://github.com/Sitoi) -------------------- 𝗱𝗮𝗶𝗹𝘆𝗰𝗵𝗲𝗰𝗸𝗶𝗻
+[@𝐒𝐢𝐭𝐨𝐢](https://github.com/Sitoi) ----------- 𝗱𝗮𝗶𝗹𝘆𝗰𝗵𝗲𝗰𝗸𝗶𝗻
 
-[@𝐲𝐮𝐱𝐢𝐚𝐧𝟏𝟓𝟖](https://github.com/yuxian158) ----------- 𝗾𝗹-𝗰𝗵𝗲𝗰𝗸𝗯𝗼𝘅
+[@𝐲𝐮𝐱𝐢𝐚𝐧𝟏𝟓𝟖](https://github.com/yuxian158) ---- 𝗾𝗹-𝗰𝗵𝗲𝗰𝗸𝗯𝗼𝘅
 
-[@𝐢𝐬𝐞𝐜𝐫𝐞𝐭](https://github.com/isecret) --------------- 𝗦𝗦𝗣𝗮𝗻𝗲𝗹 𝗦𝗵𝗲𝗹𝗹
+[@𝐢𝐬𝐞𝐜𝐫𝐞𝐭](https://github.com/isecret) ------- 𝗦𝗦𝗣𝗮𝗻𝗲𝗹 𝗦𝗵𝗲𝗹𝗹
 
-[@𝐡𝐰𝐤𝐱𝐤](https://github.com/hwkxk) ----------------------- 𝗛𝗲𝘆𝗧𝗮𝗽
+[@𝐡𝐰𝐤𝐱𝐤](https://github.com/hwkxk) -------------- 𝗛𝗲𝘆𝗧𝗮𝗽
 
-[@𝐥𝐮𝐦𝐢𝐧𝐨𝐥𝐞𝐨𝐧](https://github.com/luminoleon) ---- 𝗲𝗽𝗶𝗰𝗴𝗮𝗺𝗲𝘀-𝗰𝗹𝗮𝗶𝗺𝗲𝗿
-
-@𝑶𝒕𝒉𝒆𝒓𝒔 -------------- 𝔰𝔠𝔯𝔦𝔭𝔱 𝔠𝔬𝔪𝔪𝔢𝔫𝔱𝔰
+@𝑶𝒕𝒉𝒆𝒓𝒔 ----- 𝔰𝔠𝔯𝔦𝔭𝔱 𝔠𝔬𝔪𝔪𝔢𝔫𝔱𝔰
 
 ## 历史 Star 数
 

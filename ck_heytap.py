@@ -6,22 +6,33 @@ new Env('欢太商城');
 """
 
 import json
+import os
 import re
 import time
 
 import requests
 
 import utils_tmp
-from notify_mtr import send
-from utils import get_data
+
+try:
+    from notify_mtr import send
+except ModuleNotFoundError:
+    import notify_mtr_json
+
+    send = notify_mtr_json.send
+try:
+    from utils import get_data
+except ModuleNotFoundError:
+    pass
 
 
 class Heytap:
-    def __init__(self, check_items):
-        self.check_items = check_items
+    def __init__(self, config):
         self.client = None
         self.session = requests.session()
+        self.login = config["HEYTAP"]
         self.log = ""
+        self.config = config
         self.cookies = "cookie"
         self.user_agent = "ua"
         self.s_channel = "oppostore"
@@ -72,7 +83,7 @@ class Heytap:
     def get_user_info(self):
         flag = False
         headers = {
-            "Host": "store.oppo.com",
+            "Host": "www.heytap.com",
             "Accept": self.accept,
             "Content-Type": self.content_type1,
             "Connection": "keep-alive",
@@ -82,16 +93,16 @@ class Heytap:
             "cookie": self.cookies,
         }
         response = self.session.get(
-            "https://store.oppo.com/cn/oapi/users/web/member/info", headers=headers
+            "https://www.heytap.com/cn/oapi/users/web/member/info", headers=headers
         )
         response.encoding = "utf-8"
         try:
             result = response.json()
             if result["code"] == 200:
-                self.log += f'======== {result["data"]["userName"]} ========\n'
+                self.log += f'======== {result["data"]["realName"]} ========\n'
                 self.log += (
                     "【登录成功】："
-                    + result["data"]["userName"]
+                    + result["data"]["realName"]
                     + f"\n【抽奖开关】：{self.if_draw}\n"
                 )
                 flag = True
@@ -226,7 +237,7 @@ class Heytap:
                                 i += 1
                                 if i > 10:
                                     break
-                                time.sleep(7)
+                                time.sleep(5)
                             res2 = self.cashingCredits(
                                 data["marking"], data["type"], data["credits"]
                             )
@@ -274,6 +285,50 @@ class Heytap:
                 while count <= endcount:
                     self.client.get(
                         "https://msec.opposhop.cn/users/vi/creditsTask/pushTask?marking=daily_sharegoods",
+                        headers=headers,
+                    )
+                    count += 1
+                res2 = self.cashingCredits(qd["marking"], qd["type"], qd["credits"])
+                if res2:
+                    self.log += self.point_got + str(qd["credits"]) + "\n"
+                else:
+                    self.log += self.point_err
+            elif qd["completeStatus"] == 1:
+                res2 = self.cashingCredits(qd["marking"], qd["type"], qd["credits"])
+                if res2:
+                    self.log += self.point_got + str(qd["credits"]) + "\n"
+                else:
+                    self.log += self.point_err
+            else:
+                self.log += self.done_msg
+        except Exception as e:
+            self.log += self.err_msg + str(e) + "\n"
+
+    def daily_viewpush(self):
+        self.log += "【每日点推送】\n"
+        try:
+            headers = {
+                "clientPackage": self.client_package,
+                "Host": self.host2,
+                "Accept": self.accept,
+                "Content-Type": self.content_type1,
+                "Connection": "keep-alive",
+                "User-Agent": self.user_agent2,
+                "Accept-Encoding": "gzip",
+                "cookie": self.cookies,
+            }
+            daysignlist = self.taskCenter()
+            res = daysignlist
+            res = res["data"]["everydayList"]
+            for data in res:
+                if data["name"] == "点推送消息":
+                    qd = data
+            if qd["completeStatus"] == 0:
+                count = qd["readCount"]
+                endcount = qd["times"]
+                while count <= endcount:
+                    self.client.get(
+                        "https://msec.opposhop.cn/users/vi/creditsTask/pushTask?marking=daily_viewpush",
                         headers=headers,
                     )
                     count += 1
@@ -418,57 +473,56 @@ class Heytap:
                     time.strptime(end_time, "%Y-%m-%d %H:%M:%S")
                 )  # 设置活动结束日期
 
-                if dated < end_time:
-                    if if_task:
-                        res = self.client.get(
-                            f"https://hd.oppo.com/task/list?aid={aid}", headers=headers
-                        )
-                        tasklist = res.json()
-                        self.log += f"【{act_name}-任务】\n"
-                        for _, jobs in enumerate(tasklist["data"]):
-                            title = jobs["title"]
-                            t_index = jobs["t_index"]
-                            aid = t_index[: t_index.index("i")]
-                            if jobs["t_status"] == 0:
-                                finishmsg = self.task_finish(aid, t_index)
-                                if finishmsg["no"] == "200":
-                                    time.sleep(1)
-                                    awardmsg = self.task_award(aid, t_index)
-                                    msg = awardmsg["msg"]
-                                    self.log += f"{title}：{msg}\n"
-                                    time.sleep(3)
-                            elif jobs["t_status"] == 1:
+                if dated < end_time and if_task:
+                    res = self.client.get(
+                        f"https://hd.oppo.com/task/list?aid={aid}", headers=headers
+                    )
+                    tasklist = res.json()
+                    self.log += f"【{act_name}-任务】\n"
+                    for i, jobs in enumerate(tasklist["data"]):
+                        title = jobs["title"]
+                        t_index = jobs["t_index"]
+                        aid = t_index[: t_index.index("i")]
+                        if jobs["t_status"] == 0:
+                            finishmsg = self.task_finish(aid, t_index)
+                            if finishmsg["no"] == "200":
+                                time.sleep(1)
                                 awardmsg = self.task_award(aid, t_index)
                                 msg = awardmsg["msg"]
                                 self.log += f"{title}：{msg}\n"
                                 time.sleep(3)
-                            else:
-                                self.log += f"{title}：任务已完成\n"
-                    if self.if_draw and if_draw:  # 判断当前用户是否抽奖 和 判断当前活动是否抽奖
-                        lid = act_list["lid"]
-                        extra_draw_cookie = act_list["extra_draw_cookie"]
-                        draw_times = act_list["draw_times"]
-                        self.log += f"【{act_name}-抽奖】："
-                        x = 0
-                        while x < draw_times:
-                            data = f"aid={aid}&lid={lid}&mobile=&authcode=&captcha=&isCheck=0&source_type={self.source_type}&s_channel={self.s_channel}&sku=&spu="
-                            res = self.lottery(data, referer, extra_draw_cookie)
-                            msg = res["msg"]
-                            if "次数已用完" in msg:
-                                self.log += "  第" + str(x + 1) + "抽奖：抽奖次数已用完\n"
-                                break
-                            if "活动已结束" in msg:
-                                self.log += "  第" + str(x + 1) + "抽奖：活动已结束，终止抽奖\n"
-                                break
-                            goods_name = res["data"]["goods_name"]
-                            if goods_name:
-                                self.log += (
-                                    "  第" + str(x + 1) + "次抽奖：" + str(goods_name) + "\n"
-                                )
-                            elif "提交成功" in msg:
-                                self.log += "  第" + str(x + 1) + "次抽奖：未中奖\n"
-                            x += 1
-                            time.sleep(5)
+                        elif jobs["t_status"] == 1:
+                            awardmsg = self.task_award(aid, t_index)
+                            msg = awardmsg["msg"]
+                            self.log += f"{title}：{msg}\n"
+                            time.sleep(3)
+                        else:
+                            self.log += f"{title}：任务已完成\n"
+                if self.if_draw and if_draw:  # 判断当前用户是否抽奖 和 判断当前活动是否抽奖
+                    lid = act_list["lid"]
+                    extra_draw_cookie = act_list["extra_draw_cookie"]
+                    draw_times = act_list["draw_times"]
+                    self.log += f"【{act_name}-抽奖】："
+                    x = 0
+                    while x < draw_times:
+                        data = f"aid={aid}&lid={lid}&mobile=&authcode=&captcha=&isCheck=0&source_type={self.source_type}&s_channel={self.s_channel}&sku=&spu="
+                        res = self.lottery(data, referer, extra_draw_cookie)
+                        msg = res["msg"]
+                        if "次数已用完" in msg:
+                            self.log += "  第" + str(x + 1) + "抽奖：抽奖次数已用完\n"
+                            break
+                        if "活动已结束" in msg:
+                            self.log += "  第" + str(x + 1) + "抽奖：活动已结束，终止抽奖\n"
+                            break
+                        goods_name = res["data"]["goods_name"]
+                        if goods_name:
+                            self.log += (
+                                "  第" + str(x + 1) + "次抽奖：" + str(goods_name) + "\n"
+                            )
+                        elif "提交成功" in msg:
+                            self.log += "  第" + str(x + 1) + "次抽奖：未中奖\n"
+                        x += 1
+                        time.sleep(5)
                 else:
                     self.log += f"【{act_name}】：活动已结束，不再执行\n"
         except Exception as e:
@@ -552,21 +606,132 @@ class Heytap:
         except Exception as e:
             self.log += "【早睡打卡】：错误，原因为: " + str(e) + "\n"
 
+    # 集卡活动 活动已结束
+    def collect_cards(self):
+        try:
+            # 初始化活动
+            headers = {
+                "Referer": "https://store.oppo.com/cn/app/collectCard/index?activityId=JP6BEV78&us=shouye&um=chaping&uc=all",
+                "User-Agent": self.user_agent,
+                "cookie": self.cookies,
+                "Content-Type": self.content_type2,
+            }
+
+            # 助力
+            mid = [
+                "bce3e0ae99e39c7b17db589857e36f01",
+                "2d92651041497960f85880c699a5674b",
+                "8675bdfa84f88f6efee026af8db2cba5",
+                "766d3d50f9d256b11728f09ef241accc",
+            ]
+            self.log += f"【集卡-助力】："
+            for mid in mid:
+                url = f"https://msec.opposhop.cn/credits/web/ccv2/shareActivity?activityId=JP6BEV78&mid={mid}"
+                res = requests.get(url, headers=headers).json()
+                if res["code"] == 200 and res["data"] == True:
+                    self.log += f"助力{mid}：成功\n"
+                else:
+                    self.log += f"助力{mid}：失败\n"
+                time.sleep(3)
+
+            # 获取任务列表 #抽奖
+            url = "https://store.oppo.com/cn/oapi/credits/web/ccv2/getLottery"
+            data = "activityId=JP6BEV78"
+            res = requests.post(url, data=data, headers=headers).json()
+            self.log += f"【集卡-做任务】："
+            if res["code"] == 200:
+                tasklist = res["data"]
+                for task in tasklist:
+                    taskId = task["taskId"]
+                    status = task["status"]
+                    name = task["name"]
+                    # 0 未完成 2 已完成
+                    if status == 0:
+                        if taskId == "daily_share_collectCard":
+                            self.log += f'{name}：助力码为{task["mid"]}\n'
+                            continue
+                        if taskId == "once_buy_parts":
+                            self.log += f"{name}：不花钱也想做任务？\n"
+                            continue
+                        if taskId == "once_buy_phone":
+                            self.log += f"{name}：不花钱也想做任务？\n"
+                            continue
+                        if taskId == "once_join_pinggo":
+                            self.log += f"{name}：不花钱也想做任务？\n"
+                            continue
+                        if taskId == "daily_send_friend":
+                            self.log += f"{name}：请手动完成送卡\n"
+                            continue
+
+                        url = f"https://store.oppo.com/cn/oapi/credits/web/ccv2/ReportedTask?activityId=JP6BEV78&taskType={taskId}"
+                        res = requests.get(url, headers=headers).json()
+                        if res["code"] == 200 and res["data"]:
+                            self.log += f"{name}：做任务成功\n"
+                        else:
+                            self.log += f"{name}：做任务失败\n"
+                        time.sleep(5)
+                    elif status == 2:
+                        self.log += f"{name}：任务已完成\n"
+
+                # 获取抽卡次数
+                url = "https://store.oppo.com/cn/oapi/credits/web/ccv2/playerPage?activityId=JP6BEV78"
+                res = requests.get(url, headers=headers).json()
+                if res["code"] == 200:
+                    self.log += f"【集卡-抽卡】："
+                    chanceCount = res["data"]["chanceCount"]
+                    for i in range(int(chanceCount)):
+                        # 抽卡
+                        url = "https://store.oppo.com/cn/oapi/credits/web/ccv2/collect"
+                        data = "activityId=JP6BEV78"
+                        res = requests.post(url, data=data, headers=headers).json()
+                        if res["code"] == 200:
+                            self.log += f'第{i + 1}次抽奖：{res["data"]["collectCard"]["cardName"]}\n'
+                            time.sleep(5)
+                # 翻牌
+                url = "https://store.oppo.com/cn/oapi/credits/web/ccv2/playerPage?activityId=JP6BEV78"
+                res = requests.get(url, headers=headers).json()
+                if res["code"] == 200:
+                    self.log += f"【集卡-翻牌抽奖】："
+                    collectCardPlayerInfoList = res["data"]["collectCardPlayerInfoList"]
+                    for cardlist in collectCardPlayerInfoList:
+                        cardName = cardlist["cardName"]
+                        num = cardlist["num"]
+                        self.log += f"{cardName}：{num}张\n"
+                        if int(num) > 0:
+
+                            for userCard in cardlist["userCardList"]:
+                                if userCard["giftId"] != None:
+                                    self.log += f'{cardName}-卡片代码{userCard["cardCode"]}-卡片已抽过-{userCard["giftDesc"]}\n'
+                                else:
+                                    url = "https://store.oppo.com/cn/oapi/credits/web/ccv2/backGifts"
+                                    data = f'cardCode={userCard["cardCode"]}&activityId=JP6BEV78'
+                                    res = requests.post(
+                                        url, data=data, headers=headers
+                                    ).json()
+                                    if res["code"] == 200:
+                                        self.log += f'{cardName}-卡片代码{userCard["cardCode"]}-{res["data"]["giftDesc"]}\n'
+                                    time.sleep(5)
+
+        except Exception as e:
+            self.log += "【集卡】：错误，原因为: " + str(e) + "\n"
+
     # 主程序
     def main(self):
         i = 1
-        for check_item in self.check_items:
-            self.cookies = check_item.get("cookie")
-            self.user_agent = check_item.get("useragent")
-            self.if_draw = check_item.get("draw")
+        for config in self.login:
+            self.cookies = config["cookie"]
+            self.user_agent = config["useragent"]
+            self.if_draw = config["draw"]
             self.client = self.get_user_info()
             if self.client:
                 try:
                     self.daily_bonus()  # 执行每日签到
                     self.daily_viewgoods()  # 执行每日商品浏览任务
                     self.daily_sharegoods()  # 执行每日商品分享任务
+                    # self.daily_viewpush()  # 执行每日点推送任务  任务下线
                     self.do_task_and_draw()  # 自己修改的接口，针对活动任务及抽奖，新增及删除活动请修改act_list.py
-                    # self.zaoshui_task()  # 早睡报名 由于自己不能及时更新cookie，就关闭了打卡
+                    self.zaoshui_task()  # 早睡报名 由于自己不能及时更新cookie，就关闭了打卡
+                    # self.collect_cards()  # 集卡活动  #活动结束，奖励都不太好，新一期不再更新
                 except Exception as e:
                     self.log += f"账号{i}执行出错：{e}\n"
             else:
@@ -576,8 +741,20 @@ class Heytap:
         return self.log
 
 
-if __name__ == "__main__":
-    data = get_data()
-    _check_items = data.get("HEYTAP", [])
-    res = Heytap(check_items=_check_items).main()
+# 腾讯云函数入口
+def main_handler(event, context):
+    try:
+        cf = get_data()
+    except Exception:
+        # 读取 src 目录下 check.json 配置文件
+        with open(
+            os.path.join(os.path.dirname(__file__), "check.json"), "r", encoding="utf-8"
+        ) as f:
+            cf = json.loads(f.read())
+    res = Heytap(cf).main()
     send("欢太商城", res)
+
+
+# 主函数入口
+if __name__ == "__main__":
+    main_handler("", "")

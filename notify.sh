@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # shellcheck disable=SC2154
 send_message() {
@@ -112,7 +112,7 @@ send_message() {
         echo -e "msg=${result_qmsg_log_text}" >"${PUSH_TMP_PATH}"
         push=$(curl -k -s --data-binary @"${PUSH_TMP_PATH}" "https://qmsg.zendee.cn/send/${QMSG_KEY}")
         push_code=$(echo "${push}" | jq -r ".success" 2>&1)
-        if [ "${push_code}" == "true" ]; then
+        if [ "${push_code}" = "true" ]; then
             echo -e "Qmsg 酱推送结果：成功"
         else
             echo -e "Qmsg 酱推送结果：失败"
@@ -164,7 +164,7 @@ send_message() {
     # TelegramBot 通知
     if [ "${TG_BOT_TOKEN}" ] && [ "${TG_USER_ID}" ]; then
         result_tgbot_log_text="${TITLE}${log_text}"
-        echo -e "chat_id=${TG_USER_ID}&parse_mode=Markdown&text=${result_tgbot_log_text}" >"${PUSH_TMP_PATH}"
+        echo -e "chat_id=${TG_USER_ID}&parse_mode=HTML&text=${result_tgbot_log_text}" >"${PUSH_TMP_PATH}"
         push=$(curl -k -s --data-binary @"${PUSH_TMP_PATH}" "https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage")
         push_code=$(echo "${push}" | grep -o '"ok":true')
         if [ "${push_code}" ]; then

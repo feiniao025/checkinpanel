@@ -2,7 +2,7 @@
     "name": "签到项目",
     "author": "Leon",
     "desc": "该订阅适用于 elecV2P，与其他软件并不兼容。相关说明参考：https://github.com/elecV2/elecV2P-dei/tree/master/docs/06-task.md",
-    "date": "2021-10-18 0:20:00",
+    "date": "2021-12-06 01:00:00",
     "list": [
         {
             "name": "Bash & Git",
@@ -17,7 +17,7 @@
         {
             "name": "签到仓库",
             "type": "schedule",
-            "time": "5",
+            "time": "10",
             "job": {
                 "type": "exec",
                 "target": "git clone https://ghproxy.com/https://github.com/Oreomeow/checkinpanel -cwd script/Shell"
@@ -45,12 +45,22 @@
             "running": true
         },
         {
-            "name": "签到依赖",
+            "name": "国内加速",
             "type": "schedule",
-            "time": "10",
+            "time": "0",
             "job": {
                 "type": "exec",
-                "target": "chmod +x ins_pkg.sh && bash ins_pkg.sh -cwd script/Shell/checkinpanel -timeout 600000"
+                "target": "chmod +x api_fast_cn.sh && bash api_fast_cn.sh -cwd script/Shell/checkinpanel -timeout 0"
+            },
+            "running": false
+        },
+        {
+            "name": "签到依赖",
+            "type": "schedule",
+            "time": "20",
+            "job": {
+                "type": "exec",
+                "target": "chmod +x ins_pkg.sh && bash ins_pkg.sh -cwd script/Shell/checkinpanel -timeout 0"
             },
             "running": true
         },
@@ -60,7 +70,27 @@
             "time": "10 16 * * *",
             "job": {
                 "type": "exec",
-                "target": "chmod +x ins_pkg.sh && bash ins_pkg.sh -cwd script/Shell/checkinpanel -timeout 600000"
+                "target": "chmod +x ins_pkg.sh && bash ins_pkg.sh -cwd script/Shell/checkinpanel -timeout 0"
+            },
+            "running": true
+        },
+        {
+            "name": "复制 checkins_pkg.js",
+            "type": "cron",
+            "time": "25 16 * * *",
+            "job": {
+                "type": "exec",
+                "target": "cp -rf ./Shell/checkinpanel/checkins_pkg.js ./JSFile/checkins_pkg.js -cwd script"
+            },
+            "running": true
+        },
+        {
+            "name": "ins_selenium",
+            "type": "cron",
+            "time": "32 16 * * *",
+            "job": {
+                "type": "exec",
+                "target": "chmod +x ins_selenium.sh && bash ins_selenium.sh -cwd script/Shell/checkinpanel -timeout 0"
             },
             "running": true
         },
@@ -101,6 +131,16 @@
             "job": {
                 "type": "runjs",
                 "target": "checkin.js -env PYNAME=api_ecardcheck.py"
+            },
+            "running": true
+        },
+        {
+            "name": "Hax 监控",
+            "type": "cron",
+            "time": "21 0-23/6 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=api_hax.py"
             },
             "running": true
         },
@@ -265,6 +305,16 @@
             "running": true
         },
         {
+            "name": "Epic",
+            "type": "cron",
+            "time": "50 1 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_epic.py"
+            },
+            "running": true
+        },
+        {
             "name": "EUserv",
             "type": "cron",
             "time": "0 10 */7 * *",
@@ -351,6 +401,16 @@
             "job": {
                 "type": "runjs",
                 "target": "checkin.js -env PYNAME=ck_hlx.py"
+            },
+            "running": true
+        },
+        {
+            "name": "HOSTLOC",
+            "type": "cron",
+            "time": "48 0-23/12 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_hostloc.py"
             },
             "running": true
         },
@@ -601,6 +661,16 @@
             "job": {
                 "type": "runjs",
                 "target": "checkin.js -env PYNAME=ck_womail.py"
+            },
+            "running": true
+        },
+        {
+            "name": "WPS",
+            "type": "cron",
+            "time": "12 6 * * *",
+            "job": {
+                "type": "runjs",
+                "target": "checkin.js -env PYNAME=ck_wps.py"
             },
             "running": true
         },

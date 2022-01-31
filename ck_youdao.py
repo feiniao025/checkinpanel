@@ -21,7 +21,7 @@ class YouDao:
         url = "https://note.youdao.com/yws/mapi/user?method=get"
         headers = {"Cookie": cookie}
         res = requests.get(url=url, headers=headers)
-        if res.json().get("q") == None:
+        if res.json().get("q") is None:
             return 0
         return res.json().get("q")
 
@@ -65,7 +65,7 @@ class YouDao:
                 space = str(sync + checkin + checkin2 + ad)
                 msg += f"获得空间：{space}M, 总空间：{int(s)//1048576}M"
         else:
-            msg += "错误" + re.json()
+            msg += "错误" + str(re.json())
         return msg
 
     def main(self):
